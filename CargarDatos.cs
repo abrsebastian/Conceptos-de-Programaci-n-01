@@ -7,9 +7,6 @@ class CargarDatos
     {
         for(int i = contador; i < 100; i++)
         {
-
-            
-
             System.Console.WriteLine("Ingrese nombre del Alumno:");
             alumnos[i].nombre = Console.ReadLine();
             System.Console.WriteLine("Ingrese el apellido del Alumno");
@@ -28,9 +25,11 @@ class CargarDatos
                         dniDuplicado = true;
                         System.Console.WriteLine("El DNI ingresado le corresponde a {0} {1}", alumnos[j].nombre, alumnos[j].apellido);
                         System.Console.WriteLine("Ingrese el DNI correctamente");
+                        System.Console.WriteLine("------------------------------------------------------------------------------------");
                         break;
                     }
                 }
+
                 if(dniDuplicado != true)
                 {
                     alumnos[i].dni = dniIngresado;
@@ -61,7 +60,9 @@ class CargarDatos
                 } 
             }
             
+
             alumnos[i].estadoPostulante = "Pendiente";
+            alumnos[i].estadoEntrevista = "Pendiente";
             System.Console.WriteLine("Ingrese la carrera que cursa");
             alumnos[i].carrera = Console.ReadLine();
             System.Console.WriteLine("Ingrese la nota 1:");
@@ -121,61 +122,71 @@ class CargarDatos
         System.Console.WriteLine("Ingrese DNI o Numero de Legajo del Alumno");
         datoIngresado = Convert.ToInt32(Console.ReadLine());
         
-
-        for (int i = 0; i< contador; i++)
+        while(datoIngresado != 0)
         {
-
-            if(alumno[i].dni == datoIngresado || alumno[i].legajo == datoIngresado)
+            for (int i = 0; i< contador; i++)
             {
-                posicionEncontrada = i;
+                if(alumno[i].dni == datoIngresado || alumno[i].legajo == datoIngresado)
+                {
+                    posicionEncontrada = i;
 
-                System.Console.WriteLine("Resultado:");
-                System.Console.WriteLine("Alumno: {0} {1}", alumno[i].nombre, alumno[i].apellido);
-                System.Console.WriteLine("N° de Legajo: {0}", alumno[i].legajo);
-                System.Console.WriteLine("DNI: {0}", alumno[i].dni);
-                System.Console.WriteLine("Entrevista: {0}", alumno[i].estadoEntrevista);
-                System.Console.WriteLine("Estado de su Beca: {0}", alumno[i].estadoPostulante);
+                    System.Console.WriteLine("Resultado:");
+                    System.Console.WriteLine("Alumno: {0} {1}", alumno[i].nombre, alumno[i].apellido);
+                    System.Console.WriteLine("N° de Legajo: {0}", alumno[i].legajo);
+                    System.Console.WriteLine("DNI: {0}", alumno[i].dni);
+                    System.Console.WriteLine("Entrevista: {0}", alumno[i].estadoEntrevista);
+                    System.Console.WriteLine("Estado de su Beca: {0}", alumno[i].estadoPostulante);
             
 
-                System.Console.WriteLine("Ingrese nota de la Entrevista");
+                    System.Console.WriteLine("Ingrese nota de la Entrevista");
 
-                double entrevistaIngresada = Convert.ToDouble(Console.ReadLine());
+                    double entrevistaIngresada = Convert.ToDouble(Console.ReadLine());
 
-                entrevistaIngresada = alumno[posicionEncontrada].notaEntrevista;
+                    entrevistaIngresada = alumno[posicionEncontrada].notaEntrevista;
 
-                alumno[posicionEncontrada].entrevistaIngresada = true;
+                    alumno[posicionEncontrada].entrevistaIngresada = true;
 
-                alumno[posicionEncontrada].estadoEntrevista = "Ingresada";
+                    alumno[posicionEncontrada].estadoEntrevista = "Ingresada";
 
-                System.Console.WriteLine("La entrevista del Alumno {0} {1} fue cargada con éxito", alumno[posicionEncontrada].nombre, alumno[posicionEncontrada].apellido);
-            }
-            else
-            {
-                System.Console.WriteLine("No éxiste alumno con esos datos");
-            }
-
-            string decision = "";
-
-            while(decision != "S" && decision != "N")
-            {
-                System.Console.WriteLine("¿Desea buscar otro alumno?");
-                decision = Console.ReadLine().ToUpper();
-
-                if(decision != "S" && decision != "N")
-                {
-                    System.Console.WriteLine("Opción incorrecta, ingrese 'S o 'N'");
+                    System.Console.WriteLine("La entrevista del Alumno {0} {1} fue cargada con éxito", alumno[posicionEncontrada].nombre, alumno[posicionEncontrada].apellido);
                 }
+                else
+                {
+                    System.Console.WriteLine("No éxiste alumno con esos datos");
+                }
+                
+                string decision = "";
+                
+                while(decision != "S" && decision != "N")
+                {
+                    System.Console.WriteLine("¿Desea buscar otro alumno?");
+                    decision = Console.ReadLine().ToUpper();
+
+                    if(decision != "S" && decision != "N")
+                    {
+                        System.Console.WriteLine("Opción incorrecta, ingrese 'S o 'N'");
+                    }
+                }
+
+                if(decision == "N")
+                {   
+                    System.Console.WriteLine("Saliendo de la opción...");
+                    return;
+
+                }
+
+                else if(decision == "S")
+                {
+                    System.Console.WriteLine("Ingrese DNI o Legajo del alumno_______");
+                    datoIngresado = Convert.ToInt32(Console.ReadLine());
+                    break;
+                }
+                
             }
 
-            if(decision == "N")
-            {   
-                System.Console.WriteLine("Saliendo de la opción...");
-                break;
-
-                Console.Clear();
-            }
-          
         }
-
     }
+
+
+        
 }

@@ -23,8 +23,7 @@ class Calculador
             System.Console.WriteLine("N° de Legajo: {0}", alumno.legajo);
             System.Console.WriteLine("DNI: {0}", alumno.dni);
             System.Console.WriteLine("Promedio Final: {0}", alumno.promedioFinal);
-            System.Console.WriteLine("Estado de su Beca: {0}", alumno.estadoPostulante);
-            
+            System.Console.WriteLine("Estado de su Beca: {0}", alumno.estadoPostulante);        
         }
         else
         {
@@ -35,7 +34,6 @@ class Calculador
             System.Console.WriteLine("DNI: {0}", alumno.dni);
             System.Console.WriteLine("Promedio Final: {0}", alumno.promedioFinal);
             System.Console.WriteLine("Estado de su Beca: {0}", alumno.estadoPostulante);
-
         }
     }
 
@@ -75,23 +73,21 @@ class Calculador
                 System.Console.WriteLine("Promedio: {0}", alumnosNoAptos[i].promedioNotas);
                 System.Console.WriteLine("Estado del Postulante: {0}",alumnosNoAptos[i].estadoPostulante);
                 System.Console.WriteLine("------------------------------------------------------");
-            }
-
-            
+            }  
         }
-
-        
     }
 
 
     public static void PromediosCandidatos(Alumno[] alumnosCandidatos, int contador)
     {
-        
         for(int i = 0; i < contador; i++)
         {
             if(alumnosCandidatos[i].promedioCalculado == false)
             {
-                alumnosCandidatos[i].promedioNotas = CalcularPromedioIndividual(alumnosCandidatos[i].nota1,alumnosCandidatos[i].nota2,alumnosCandidatos[i].nota3);
+                alumnosCandidatos[i].promedioNotas = CalcularPromedioIndividual(
+                    alumnosCandidatos[i].nota1,alumnosCandidatos[i].nota2,
+                    alumnosCandidatos[i].nota3);
+                
                 alumnosCandidatos[i].promedioCalculado = true;
             }
 
@@ -106,6 +102,5 @@ class Calculador
                 System.Console.WriteLine("------------------------------------------------------");
             }
         }
-
     }
 }
