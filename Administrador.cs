@@ -1,10 +1,11 @@
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using Proyecto;
 
 class Adminsitrador
 {
-    public static void AdministradorAlumno(Program.Alumno[] alumnos, int contador)
+    public static void AdministradorAlumno(Alumno[] alumnos, int contador)
     {
         int posicionEncontrada = -1;
         System.Console.WriteLine("Ingrese numero de DNI o Legajo del alumno");
@@ -30,9 +31,17 @@ class Adminsitrador
                     
                     if(alumnos[posicionEncontrada].promedioNotas < 5)
                     {
-                        alumnos[posicionEncontrada].estadoPostulante = "No Apto";
+                        alumnos[posicionEncontrada].estadoPostulante = "Rechazada";
 
-                        System.Console.WriteLine("El Alumno {0} {1} no es apto", alumnos[posicionEncontrada].nombre, alumnos[posicionEncontrada].apellido);
+                        System.Console.WriteLine("La Solicitud para la beca quedó desestimada.");
+
+                        System.Console.WriteLine("------------------------------------------------------------------------------------------------");
+                        System.Console.WriteLine("Alumno: {0} {1}", alumnos[posicionEncontrada].nombre, alumnos[posicionEncontrada].apellido);
+                        System.Console.WriteLine("N° de Legajo: {0}", alumnos[posicionEncontrada].legajo);
+                        System.Console.WriteLine("DNI: {0}", alumnos[posicionEncontrada].dni);
+                        System.Console.WriteLine("Promedio Final: {0}", alumnos[posicionEncontrada].promedioNotas);
+                        System.Console.WriteLine("Estado de su Beca: {0}", alumnos[posicionEncontrada].estadoPostulante);
+                        System.Console.WriteLine("------------------------------------------------------------------------------------------------");
 
                         des = "";
 
@@ -45,6 +54,7 @@ class Adminsitrador
                             {
                                 System.Console.WriteLine("La opción ingresada es incorrecta");
                                 System.Console.WriteLine("Ingrese (S/N)");
+
                             }
                             
                         }
@@ -65,9 +75,11 @@ class Adminsitrador
                        
                     }
 
-                    else if(alumnos[posicionEncontrada].promedioNotas >= 8)
+                    else if(alumnos[posicionEncontrada].promedioNotas >= 8 && alumnos[posicionEncontrada].entrevistaIngresada == false)
                     {
                         alumnos[posicionEncontrada].estadoPostulante = "Candidato a Beca";
+                        alumnos[posicionEncontrada].estadoEntrevista = "Pendiente";
+
                         System.Console.WriteLine("El alumno {0} {1} es {2}", alumnos[posicionEncontrada].nombre,alumnos[posicionEncontrada].apellido,alumnos[posicionEncontrada].estadoPostulante);
 
                         System.Console.WriteLine("Pero el estado de su entrevista está: {0}", alumnos[posicionEncontrada].estadoEntrevista);
@@ -97,6 +109,7 @@ class Adminsitrador
                             alumnos[posicionEncontrada].notaEntrevista = notaNuevaEntrevista;
                             alumnos[posicionEncontrada].entrevistaIngresada = true;
                             
+                            Calculador.VeredictoFinal(ref alumnos[posicionEncontrada]);
 
                         }
 
@@ -129,8 +142,9 @@ class Adminsitrador
                         
                     }
 
-                    else if(alumnos[posicionEncontrada].promedioNotas > 5 && alumnos[posicionEncontrada].promedioNotas < 8)
+                    else if(alumnos[posicionEncontrada].promedioNotas >= 5 && alumnos[posicionEncontrada].promedioNotas < 8)
                     {
+                        alumnos[posicionEncontrada].estadoPostulante = "Pendiente";
                         alumnos[posicionEncontrada].estadoPostulante = "Pendiente";
                         System.Console.WriteLine("El alumno {0} {1} es {2}", alumnos[posicionEncontrada].nombre,alumnos[posicionEncontrada].apellido,alumnos[posicionEncontrada].estadoPostulante);
 
@@ -200,11 +214,41 @@ class Adminsitrador
                         break;
                     }
                     
+                }
+                else
+                {
+                    System.Console.WriteLine("No hay alumno registrado con DNI/Legajo {0}", datoIngresado);
+
+                    string des3 = "";
+
+                    while(des3 != "S" && des3 != "N")
+                    {
+                        System.Console.WriteLine("¿Desea buscar otro alumno? (S/N)");
+
+                        des3 = Console.ReadLine().ToUpper();
+
+                        if(des3 != "S" && des3 != "N")
+                        {
+                            System.Console.WriteLine("La opción ingresada es incorrecta");
+                            System.Console.WriteLine("ingrese (S/N)");
+                        }
                     }
 
-         
+                    if(des3 == "N")
+                    {
+                        System.Console.WriteLine("Volviendo al menú principal...");
+                        return;
+                    }
+                    else if(des3 == "S")
+                    {
+                        System.Console.WriteLine("Ingrese el número de legajo o DNI");
+                        datoIngresado = Convert.ToInt32(Console.ReadLine());
+                    }
 
                 }
+         
+
+            }
         }
         
     

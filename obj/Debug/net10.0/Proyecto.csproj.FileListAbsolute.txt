@@ -12,3 +12,4 @@ D:\Varios\Importantes\UNAJ\Conceptos de la Programación\Trabajo Practico\Proyec
 D:\Varios\Importantes\UNAJ\Conceptos de la Programación\Trabajo Practico\Proyecto\obj\Debug\net10.0\Proyecto.pdb
 D:\Varios\Importantes\UNAJ\Conceptos de la Programación\Trabajo Practico\Proyecto\obj\Debug\net10.0\Proyecto.genruntimeconfig.cache
 D:\Varios\Importantes\UNAJ\Conceptos de la Programación\Trabajo Practico\Proyecto\obj\Debug\net10.0\ref\Proyecto.dll
+D:\Varios\Importantes\UNAJ\Conceptos de la Programación\Trabajo Practico\Proyecto\obj\Debug\net10.0\Proyecto.sourcelink.json

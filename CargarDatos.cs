@@ -1,23 +1,69 @@
+using System.Runtime.Serialization.Formatters;
 using Proyecto;
 
 class CargarDatos
 {
-    public static int CargarAlumnos(Program.Alumno[] alumnos, int contador)
+    public static int CargarAlumnos(Alumno[] alumnos, int contador)
     {
         for(int i = contador; i < 100; i++)
         {
+
+            
+
             System.Console.WriteLine("Ingrese nombre del Alumno:");
             alumnos[i].nombre = Console.ReadLine();
             System.Console.WriteLine("Ingrese el apellido del Alumno");
             alumnos[i].apellido = Console.ReadLine();
-            System.Console.WriteLine("Ingrese su DNI");
-            alumnos[i].dni = Convert.ToInt32(Console.ReadLine());
-            System.Console.WriteLine("Ingrese numero de Legajo");
-            alumnos[i].legajo = Convert.ToInt32(Console.ReadLine());
+
+            while (true)
+            {   
+                System.Console.WriteLine("Ingrese el DNI");
+                int dniIngresado = Convert.ToInt32(Console.ReadLine());
+                bool dniDuplicado = false;
+
+                for(int j = 0; j < contador; j++)
+                {
+                    if(alumnos[j].dni == dniIngresado)
+                    {
+                        dniDuplicado = true;
+                        System.Console.WriteLine("El DNI ingresado le corresponde a {0} {1}", alumnos[j].nombre, alumnos[j].apellido);
+                        System.Console.WriteLine("Ingrese el DNI correctamente");
+                        break;
+                    }
+                }
+                if(dniDuplicado != true)
+                {
+                    alumnos[i].dni = dniIngresado;
+                    break;
+                }
+            }
+
+            while (true)
+            {
+                System.Console.WriteLine("Ingrese el número de legajo");
+                int legajoIngresado = Convert.ToInt32(Console.ReadLine());
+                bool legajoDuplicado = false;
+
+                for(int j = 0; j < contador; j++)
+                {
+                    if(alumnos[j].legajo == legajoIngresado)
+                    {
+                        legajoDuplicado = true;
+                        System.Console.WriteLine("El legajo ingresado es del alumno {0} {1}", alumnos[j].nombre, alumnos[j].apellido);
+                        System.Console.WriteLine("Ingrese otro número de legajo");
+                        break;
+                    }
+                }
+                if(legajoDuplicado != true)
+                {
+                    alumnos[i].legajo = legajoIngresado;
+                    break;
+                } 
+            }
+            
+            alumnos[i].estadoPostulante = "Pendiente";
             System.Console.WriteLine("Ingrese la carrera que cursa");
             alumnos[i].carrera = Console.ReadLine();
-            alumnos[i].estadoPostulante = "Pendiente";
-
             System.Console.WriteLine("Ingrese la nota 1:");
             alumnos[i].nota1 = Convert.ToDouble(Console.ReadLine());
             System.Console.WriteLine("Ingrese la nota 2:");
@@ -66,7 +112,7 @@ class CargarDatos
         return contador;
     }
 
-    public static void CargarEntrevista(Program.Alumno[] alumno, int contador)
+    public static void CargarEntrevista(Alumno[] alumno, int contador)
     {
         int posicionEncontrada = -1;
 
@@ -82,6 +128,14 @@ class CargarDatos
             if(alumno[i].dni == datoIngresado || alumno[i].legajo == datoIngresado)
             {
                 posicionEncontrada = i;
+
+                System.Console.WriteLine("Resultado:");
+                System.Console.WriteLine("Alumno: {0} {1}", alumno[i].nombre, alumno[i].apellido);
+                System.Console.WriteLine("N° de Legajo: {0}", alumno[i].legajo);
+                System.Console.WriteLine("DNI: {0}", alumno[i].dni);
+                System.Console.WriteLine("Entrevista: {0}", alumno[i].estadoEntrevista);
+                System.Console.WriteLine("Estado de su Beca: {0}", alumno[i].estadoPostulante);
+            
 
                 System.Console.WriteLine("Ingrese nota de la Entrevista");
 

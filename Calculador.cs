@@ -10,7 +10,7 @@ class Calculador
         return Math.Round((n1 + n2 + n3)/3, 2);
     }
 
-    public static void VeredictoFinal(ref Program.Alumno alumno)
+    public static void VeredictoFinal(ref Alumno alumno)
     {
         double promedioGlobal = Math.Round((alumno.promedioNotas + alumno.notaEntrevista)/2,2);
         alumno.promedioFinal = promedioGlobal;
@@ -24,6 +24,7 @@ class Calculador
             System.Console.WriteLine("DNI: {0}", alumno.dni);
             System.Console.WriteLine("Promedio Final: {0}", alumno.promedioFinal);
             System.Console.WriteLine("Estado de su Beca: {0}", alumno.estadoPostulante);
+            
         }
         else
         {
@@ -38,7 +39,7 @@ class Calculador
         }
     }
 
-    public static void CalcularPromedio(Program.Alumno[] alumnos, int contador)
+    public static void CalcularPromedio(Alumno[] alumnos, int contador)
     {
         for(int i = 0; i<contador; i++)
         {
@@ -53,7 +54,7 @@ class Calculador
         }
     }
 
-    public static void PromediosNoAptos(Program.Alumno[] alumnosNoAptos, int contador)
+    public static void PromediosNoAptos(Alumno[] alumnosNoAptos, int contador)
     {
         System.Console.WriteLine("Los promedios NO aptos son: ");    
 
@@ -83,7 +84,7 @@ class Calculador
     }
 
 
-    public static void PromediosCandidatos(Program.Alumno[] alumnosCandidatos, int contador)
+    public static void PromediosCandidatos(Alumno[] alumnosCandidatos, int contador)
     {
         
         for(int i = 0; i < contador; i++)

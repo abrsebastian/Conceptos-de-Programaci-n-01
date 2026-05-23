@@ -2,7 +2,7 @@ using Proyecto;
 
 class Buscador
 {
-    public static void BuscarAlumnoPorLegajo(Program.Alumno[] alumnos, int contador)
+    public static void BuscarAlumnoPorLegajo(Alumno[] alumnos, int contador)
     {
         int posicionEncontrada = -1;
         int legajoIngresado = 0;
