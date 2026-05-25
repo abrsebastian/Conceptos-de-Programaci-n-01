@@ -54,7 +54,10 @@ class Calculador
 
     public static void PromediosNoAptos(Alumno[] alumnosNoAptos, int contador)
     {
-        System.Console.WriteLine("Los promedios NO aptos son: ");    
+        System.Console.WriteLine("Alumnos desestimados de la beca:");
+        System.Console.WriteLine("------------------------------------------------------------");    
+
+        bool datoEncontrado = false;
 
         for(int i = 0; i < contador; i++)
         {
@@ -68,18 +71,34 @@ class Calculador
             {
                 alumnosNoAptos[i].estadoPostulante = "No apto";
 
+                datoEncontrado = true;
                 //System.Console.WriteLine("------------------------------------------------------");
                 System.Console.WriteLine("Alumno: {0} {1}", alumnosNoAptos[i].nombre, alumnosNoAptos[i].apellido);
                 System.Console.WriteLine("Promedio: {0}", alumnosNoAptos[i].promedioNotas);
                 System.Console.WriteLine("Estado del Postulante: {0}",alumnosNoAptos[i].estadoPostulante);
-                System.Console.WriteLine("------------------------------------------------------");
-            }  
+                System.Console.WriteLine("------------------------------------------------------------");
+            }
+
+            
         }
+
+        if(datoEncontrado == false)
+        {
+            System.Console.WriteLine("Sin resultados encontrados");
+            System.Console.WriteLine("------------------------------------------------------------");
+        }  
+
+
     }
 
 
     public static void PromediosCandidatos(Alumno[] alumnosCandidatos, int contador)
     {
+        System.Console.WriteLine("Alumnos candidatos a la Beca:");
+        System.Console.WriteLine("------------------------------------------------------------");
+
+        bool datoEncontrado = false;
+
         for(int i = 0; i < contador; i++)
         {
             if(alumnosCandidatos[i].promedioCalculado == false)
@@ -95,12 +114,22 @@ class Calculador
             {
                 alumnosCandidatos[i].estadoPostulante = "Candidato a Beca";
 
-               // System.Console.WriteLine("------------------------------------------------------");
+                datoEncontrado = true;
+
                 System.Console.WriteLine("Alumno: {0} {1}", alumnosCandidatos[i].nombre, alumnosCandidatos[i].apellido);
                 System.Console.WriteLine("Promedio: {0}", alumnosCandidatos[i].promedioNotas);
                 System.Console.WriteLine("Estado del Postulante: {0}",alumnosCandidatos[i].estadoPostulante);
-                System.Console.WriteLine("------------------------------------------------------");
+                System.Console.WriteLine("------------------------------------------------------------");
             }
+
+            
         }
+        if(datoEncontrado == false)
+        {
+            System.Console.WriteLine("Sin resultados encontrados");
+            System.Console.WriteLine("------------------------------------------------------------");
+        } 
+
+
     }
 }

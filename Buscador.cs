@@ -1,36 +1,44 @@
+using System.Net;
 using Proyecto;
 
 class Buscador
 {
     public static void BuscarAlumnoPorLegajo(Alumno[] alumnos, int contador)
     {
-        int posicionEncontrada = -1;
-        int legajoIngresado = 0;
+        System.Console.WriteLine("Ingrese numero de Legajo del Alumno");
+        int legajoIngresado = Convert.ToInt32(Console.ReadLine());
 
-        for(int i = 0; i < contador; i++)
+        while(legajoIngresado != 0)
         {
-            System.Console.WriteLine("Ingrese numero de Legajo del Alumno");
-            legajoIngresado = Convert.ToInt32(Console.ReadLine());
+            int posicionEncontrada = -1;
 
-            if(alumnos[i].legajo == legajoIngresado)
+            for(int i = 0; i < contador; i++)
             {
-                posicionEncontrada = i;
-
+                if(alumnos[i].legajo == legajoIngresado)
+                {
+                    posicionEncontrada = i;
+                    break;
+                }
+            
+            }
+            
+            if(posicionEncontrada != -1)
+            {
                 System.Console.WriteLine("--------------------------------------------");
                 System.Console.WriteLine("Alumno Encontrado");
                 System.Console.WriteLine("--------------------------------------------");
                 System.Console.WriteLine("Nombre completo: {0} {1}", alumnos[posicionEncontrada].nombre, alumnos[posicionEncontrada].apellido);
                 System.Console.WriteLine("Legajo: {0}", alumnos[posicionEncontrada].legajo);
                 System.Console.WriteLine("DNI: {0}", alumnos[posicionEncontrada].dni);
-
+                
                 if(alumnos[posicionEncontrada].promedioCalculado == false)
                 {
                     double promedioCalculado = Calculador.CalcularPromedioIndividual(alumnos[posicionEncontrada].nota1,alumnos[posicionEncontrada].nota2,alumnos[posicionEncontrada].nota3);
                     alumnos[posicionEncontrada].promedioCalculado = true;
 
-                    System.Console.WriteLine("Promedio de notas____: {0}", alumnos[posicionEncontrada].promedioCalculado);
-
                     alumnos[posicionEncontrada].promedioNotas = promedioCalculado;
+
+                    System.Console.WriteLine("Promedio de notas____: {0}", alumnos[posicionEncontrada].promedioNotas);
 
                     if(promedioCalculado < 5)
                     {
@@ -39,7 +47,7 @@ class Buscador
                     }
                     else if(promedioCalculado >= 8)
                     {
-                        alumnos[posicionEncontrada].estadoEntrevista =  "Candidato a la Beca";
+                        alumnos[posicionEncontrada].estadoPostulante =  "Candidato a la Beca";
                         System.Console.WriteLine("Estado del Postulante: {0}", alumnos[posicionEncontrada].estadoPostulante);
                     }
                     else
@@ -53,37 +61,75 @@ class Buscador
                 {
                     System.Console.WriteLine("Promedio de notas: {0}", alumnos[posicionEncontrada].promedioNotas);
                 }
-
+                
                 System.Console.WriteLine("Estado del Postulante: {0}", alumnos[posicionEncontrada].estadoPostulante);
-
+                
                 if(alumnos[posicionEncontrada].entrevistaIngresada == false)
                 {
                     alumnos[posicionEncontrada].estadoEntrevista = "Pendiente";
 
                     System.Console.WriteLine("Entrevista: {0}", alumnos[posicionEncontrada].estadoEntrevista);
                 }
+                
+                string decision ="";
+
+                while(decision != "S" && decision != "N")
+                {
+                    System.Console.WriteLine("¿Desea buscar otro alumno? (S/N)");
+                    decision = Console.ReadLine().ToUpper();
+                    
+                    if(decision != "S" && decision != "N")
+                    {
+                        System.Console.WriteLine("La opción ingresada no es válida");
+                        System.Console.WriteLine("Ingrese 'S' o 'N'");
+                    }
+
+                }
+                
+                if(decision == "N")
+                {
+                    System.Console.WriteLine("Volviendo al menú principal");
+                    return;
+                }
+                else if(decision == "S")
+                {
+                    System.Console.WriteLine("Ingrese número de Legajo");
+                    legajoIngresado = Convert.ToInt32(Console.ReadLine()); 
+                    continue;
+
+                }
             }
 
-            string decision ="";
-
-            while(decision != "S" && decision != "N")
+            else
             {
-                System.Console.WriteLine("¿Desea buscar otro alumno? (S/N)");
-                decision = Console.ReadLine().ToUpper();
+                System.Console.WriteLine("No se ha encontrado alumno con legajo: {0}", legajoIngresado);
 
-                if(decision != "S" && decision != "N")
+                string desFinal ="";
+
+                while(desFinal != "N" && desFinal != "S")
                 {
-                    System.Console.WriteLine("La opción ingresada no es válida");
-                    System.Console.WriteLine("Ingrese 'S' o 'N'");
+                    System.Console.WriteLine("¿Desea intentar con otro Legajo? (S/N)");
+                    desFinal = Console.ReadLine();
+
+                    if(desFinal != "N" && desFinal != "S")
+                    {
+                        System.Console.WriteLine("La opción ingresada no es correcta. Ingrese (S/N)");
+                    }
                 }
 
-            }
-
-            if(decision == "N")
-            {
-                System.Console.WriteLine("Volviendo al menú principal");
-                break;
+                if(desFinal == "N")
+                {
+                    System.Console.WriteLine("Volviendo al menú principal...");
+                    return;
+                }
+                else if(desFinal == "S")
+                {
+                    System.Console.WriteLine("Ingrese el número de Legajo");
+                    legajoIngresado = Convert.ToInt32(Console.ReadLine());
+                }
             }
         }
     }
+
+        
 }

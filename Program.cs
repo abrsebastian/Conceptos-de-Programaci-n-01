@@ -51,7 +51,24 @@ namespace Proyecto
                     System.Console.WriteLine("------------------------------------------------------");
                     System.Console.WriteLine("No puede ingresar a esta opción porque no hay alumnos cargados");
                     System.Console.WriteLine("------------------------------------------------------");
-                    Console.ReadKey();
+
+                    string volverAlMenu = "";
+
+                    while(volverAlMenu != "S")
+                    {
+                        System.Console.WriteLine("Presione 'S' para volver al menú principal");
+                        volverAlMenu = Console.ReadLine().ToUpper();
+
+                        if(volverAlMenu != "S")
+                        {
+                            System.Console.WriteLine("Tecla incorrecta, por favor, Presione 'S' para volver al menú principal");
+                        }
+                        
+                    }
+                    if(volverAlMenu == "S")
+                    {
+                        continue;
+                    }
                 }
 
                 switch (opcion)
