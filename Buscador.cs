@@ -30,6 +30,7 @@ class Buscador
                 System.Console.WriteLine("Nombre completo: {0} {1}", alumnos[posicionEncontrada].nombre, alumnos[posicionEncontrada].apellido);
                 System.Console.WriteLine("Legajo: {0}", alumnos[posicionEncontrada].legajo);
                 System.Console.WriteLine("DNI: {0}", alumnos[posicionEncontrada].dni);
+                System.Console.WriteLine("Carera: {0}", alumnos[posicionEncontrada].carrera);
                 
                 if(alumnos[posicionEncontrada].promedioCalculado == false)
                 {
@@ -38,22 +39,22 @@ class Buscador
 
                     alumnos[posicionEncontrada].promedioNotas = promedioCalculado;
 
-                    System.Console.WriteLine("Promedio de notas____: {0}", alumnos[posicionEncontrada].promedioNotas);
+                    System.Console.WriteLine("Promedio de notas: {0}", alumnos[posicionEncontrada].promedioNotas);
 
                     if(promedioCalculado < 5)
                     {
                         alumnos[posicionEncontrada].estadoPostulante = "No apto";
-                        System.Console.WriteLine("Estado del Postulante: {0}", alumnos[posicionEncontrada].estadoPostulante);
+                        System.Console.WriteLine("Estado de la Beca: {0}", alumnos[posicionEncontrada].estadoPostulante);
                     }
                     else if(promedioCalculado >= 8)
                     {
                         alumnos[posicionEncontrada].estadoPostulante =  "Candidato a la Beca";
-                        System.Console.WriteLine("Estado del Postulante: {0}", alumnos[posicionEncontrada].estadoPostulante);
+                        System.Console.WriteLine("Estado de la Beca: {0}", alumnos[posicionEncontrada].estadoPostulante);
                     }
                     else
                     {
                         alumnos[posicionEncontrada].estadoPostulante = "Pendiente";
-                        System.Console.WriteLine("Estado del Postulante: {0}", alumnos[posicionEncontrada].estadoPostulante);
+                        System.Console.WriteLine("Estado de la Beca: {0}", alumnos[posicionEncontrada].estadoPostulante);
                     }
 
                 }
@@ -62,7 +63,7 @@ class Buscador
                     System.Console.WriteLine("Promedio de notas: {0}", alumnos[posicionEncontrada].promedioNotas);
                 }
                 
-                System.Console.WriteLine("Estado del Postulante: {0}", alumnos[posicionEncontrada].estadoPostulante);
+                System.Console.WriteLine("Estado de la Beca: {0}", alumnos[posicionEncontrada].estadoPostulante);
                 
                 if(alumnos[posicionEncontrada].entrevistaIngresada == false)
                 {

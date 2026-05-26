@@ -33,7 +33,7 @@ namespace Proyecto
             do
             {
                 System.Console.WriteLine("------------------------------------------------------");
-                System.Console.WriteLine("ingrese una opcion");
+                System.Console.WriteLine("ingrese una opción (1 - 8)");
                 System.Console.WriteLine("1. Cargar datos de alumno");
                 System.Console.WriteLine("2. Calcular Promedios");
                 System.Console.WriteLine("3. Mostrar Candidatos no aptos");
@@ -94,6 +94,9 @@ namespace Proyecto
                     case 7:
                         Adminsitrador.AdministradorAlumno(lista, contador);
                         break;
+                    default: 
+                        System.Console.WriteLine("La opción ingresada no es válida");
+                        break;    
                 } 
             }
             while(opcion != 8);     

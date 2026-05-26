@@ -25,7 +25,7 @@ class CargarDatos
                         dniDuplicado = true;
                         System.Console.WriteLine("El DNI ingresado le corresponde a {0} {1}", alumnos[j].nombre, alumnos[j].apellido);
                         System.Console.WriteLine("Ingrese el DNI correctamente");
-                        System.Console.WriteLine("------------------------------------------------------------------------------------");
+                        System.Console.WriteLine("------------------------------------------------------");
                         break;
                     }
                 }
@@ -50,6 +50,7 @@ class CargarDatos
                         legajoDuplicado = true;
                         System.Console.WriteLine("El legajo ingresado es del alumno {0} {1}", alumnos[j].nombre, alumnos[j].apellido);
                         System.Console.WriteLine("Ingrese otro número de legajo");
+                        System.Console.WriteLine("------------------------------------------------------");
                         break;
                     }
                 }
@@ -105,7 +106,6 @@ class CargarDatos
 
                 break;
 
-                Console.Clear();
             }
 
         }
@@ -145,8 +145,9 @@ class CargarDatos
                 System.Console.WriteLine("DNI: {0}", alumno[posicionEncontrada].dni);
                 System.Console.WriteLine("Entrevista: {0}", alumno[posicionEncontrada].estadoEntrevista);
                 System.Console.WriteLine("Estado de su Beca: {0}", alumno[posicionEncontrada].estadoPostulante);
-
+                System.Console.WriteLine("------------------------------------------------------");
                 System.Console.WriteLine("¿Son correctos los datos encontrados? (S/N)");
+                System.Console.WriteLine("------------------------------------------------------");
 
                 string res = "";
 
@@ -169,13 +170,46 @@ class CargarDatos
                 }
                 else if (res == "S")
                 {
-                    System.Console.WriteLine("Ingrese nota de la Entrevista");
-               
-                    alumno[posicionEncontrada].notaEntrevista = Convert.ToDouble(Console.ReadLine());  
-                    alumno[posicionEncontrada].entrevistaIngresada = true;
-                    alumno[posicionEncontrada].estadoEntrevista = "Ingresada";
+                    if(alumno[posicionEncontrada].promedioCalculado == false)
+                    {
+                        alumno[posicionEncontrada].promedioNotas = Calculador.CalcularPromedioIndividual(
+                            alumno[posicionEncontrada].nota1,
+                            alumno[posicionEncontrada].nota2,
+                            alumno[posicionEncontrada].nota3);
+                        alumno[posicionEncontrada].promedioCalculado = true;    
+                    }
 
-                    System.Console.WriteLine("La entrevista del Alumno {0} {1} fue cargada con éxito", alumno[posicionEncontrada].nombre, alumno[posicionEncontrada].apellido);
+                    if(alumno[posicionEncontrada].promedioCalculado == true && alumno[posicionEncontrada].promedioNotas < 5)
+                    {
+                        System.Console.WriteLine("El alumno {0} {1} quedó desestimado", alumno[posicionEncontrada].nombre, alumno[posicionEncontrada].apellido);
+                        System.Console.WriteLine("del programa de becas por no haber alcanzado el promedio esperado");
+                        
+                    }
+                    else if (alumno[posicionEncontrada].promedioCalculado == true && alumno[posicionEncontrada].promedioNotas >= 8)
+                    {
+                        alumno[posicionEncontrada].estadoPostulante = "Candidato a Beca";
+
+                        System.Console.WriteLine("Ingrese nota de la Entrevista");
+               
+                        alumno[posicionEncontrada].notaEntrevista = Convert.ToDouble(Console.ReadLine());  
+                        alumno[posicionEncontrada].entrevistaIngresada = true;
+                        alumno[posicionEncontrada].estadoEntrevista = "Ingresada";
+
+                        System.Console.WriteLine("La entrevista del Alumno {0} {1} fue cargada con éxito", alumno[posicionEncontrada].nombre, alumno[posicionEncontrada].apellido);
+                        
+                    }
+                    else if(alumno[posicionEncontrada].promedioCalculado == true && alumno[posicionEncontrada].promedioNotas >= 5)
+                    {
+                        System.Console.WriteLine("Ingrese nota de la Entrevista");
+               
+                        alumno[posicionEncontrada].notaEntrevista = Convert.ToDouble(Console.ReadLine());  
+                        alumno[posicionEncontrada].entrevistaIngresada = true;
+                        alumno[posicionEncontrada].estadoEntrevista = "Ingresada";
+
+                        System.Console.WriteLine("La entrevista del Alumno {0} {1} fue cargada con éxito", alumno[posicionEncontrada].nombre, alumno[posicionEncontrada].apellido);
+                        
+                    }
+                    
                 }
 
             }
@@ -206,7 +240,7 @@ class CargarDatos
 
             else if(decision == "S")
             {
-                System.Console.WriteLine("Ingrese DNI o Legajo del alumno_______");
+                System.Console.WriteLine("Ingrese DNI o Legajo del alumno");
                 datoIngresado = Convert.ToInt32(Console.ReadLine());
             }
                 
